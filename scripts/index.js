@@ -77,6 +77,18 @@ function storeBreweries(arrayOfBreweries) {
     const jsondata = JSON.stringify(arrayOfBreweries);
     localStorage.setItem("breweries-data", jsondata)
 }
+// adds pins for brewery onto map
+function addSinglePinToMap(breweryObject){
+let breweryLng = allBreweriesList[0].longitude;
+let breweryLat = allBreweriesList[0].latitude;
+let breweryLocation = [breweryLng, breweryLat]
+let marker = new mapboxgl.Marker()
+    .setLngLat(breweryLocation)
+    .addTo(map);
+}
+function addAllPinsToMap(breweries=allBreweriesList){
+    breweries.forEach(addSinglePinToMap);
+}
 
 function main() {
     let breweriesInLocalStorage = loadBreweries();
@@ -88,7 +100,7 @@ function main() {
         for (pageNumber= 0; pageNumber <= 161 ; pageNumber++) {
             retrievePageOfBreweries(pageNumber);
         }
-    }
+    } 
+    addAllPinsToMap()
 }
 main()
-
