@@ -1,6 +1,28 @@
 //console.log("testing 123")
 
 let allBreweriesList = []
+
+// currentLocation = navigator.geolocation.getCurrentPosition(success);
+function success(pos) {
+    let crd = pos.coords;
+
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+    
+    let lnglat = [crd.longitude, crd.latitude];
+    console.log(lnglat);
+    return lnglat
+}
+
+// The below example will cause the do_something() function to execute when the location is obtained. for example we would do the open cage fetch function after so it took in the starting coordinates
+// navigator.geolocation.getCurrentPosition(function(position) {
+//     do_something(position.coords.latitude, position.coords.longitude);
+// });
+
+let startCoords = navigator.geolocation.getCurrentPosition(success)
+
 // drawing th map to  the screen
 mapboxgl.accessToken = 'pk.eyJ1IjoiamJvZXJuZXI1NiIsImEiOiJjanQ5enp3OW0wMTBnNDRwNGRxOHN4OWczIn0.R8Q3ymvlpjg6gyshPanT0Q';
 let map = new mapboxgl.Map({
@@ -99,13 +121,14 @@ function addAllPinsToMap(breweries=allBreweriesList){
 }
 
 function geoLocateUser(){
-    map.addControl(new mapboxgl.GeolocateControl({
+    let map1 = map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
             enableHighAccuracy: true
         },
         trackUserLocation: false,
         showUserLocation: true
     }));
+    console.log(map1)
 }
 
 function main() {
