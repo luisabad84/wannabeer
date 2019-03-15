@@ -2,7 +2,7 @@
 
 let allBreweriesList = []
 
-// currentLocation = navigator.geolocation.getCurrentPosition(success);
+// function that takes in geolocation position data and returns the lng and lat of the position
 function success(pos) {
     let crd = pos.coords;
 
@@ -21,7 +21,13 @@ function success(pos) {
 //     do_something(position.coords.latitude, position.coords.longitude);
 // });
 
-let startCoords = navigator.geolocation.getCurrentPosition(success)
+// sets the url needed to fetch from openCage taking geolocation data as input 
+let openCageFetchURL = navigator.geolocation.getCurrentPosition(function(position) {
+    urlForOpenCage(position.coords.latitude, position.coords.longitude);
+    // returns the url for the fetch request to be used for openCage
+        return `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=871a913950c844ea9cde99be4d2094b6`
+});
+
 
 // drawing th map to  the screen
 mapboxgl.accessToken = 'pk.eyJ1IjoiamJvZXJuZXI1NiIsImEiOiJjanQ5enp3OW0wMTBnNDRwNGRxOHN4OWczIn0.R8Q3ymvlpjg6gyshPanT0Q';
