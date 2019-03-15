@@ -91,4 +91,11 @@ function main() {
     }
 }
 main()
-
+function addPinsToMap(){
+let lng = allBreweriesList[0].longitude;
+let lat = allBreweriesList[0].latitude;
+let marker = new mapboxgl.Marker()
+    .setLngLat([lng, lat])
+    .addTo(map);
+}
+addPinsToMap()
