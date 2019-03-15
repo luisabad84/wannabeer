@@ -79,9 +79,10 @@ function storeBreweries(arrayOfBreweries) {
 }
 // adds pins for brewery onto map
 function addSinglePinToMap(breweryObject){
-let breweryLng = allBreweriesList[0].longitude;
-let breweryLat = allBreweriesList[0].latitude;
+let breweryLng = breweryObject.longitude;
+let breweryLat = breweryObject.latitude;
 let breweryLocation = [breweryLng, breweryLat]
+console.log(breweryLocation)
 let marker = new mapboxgl.Marker()
     .setLngLat(breweryLocation)
     .addTo(map);
@@ -90,6 +91,14 @@ function addAllPinsToMap(breweries=allBreweriesList){
     breweries.forEach(addSinglePinToMap);
 }
 
+// function geoLocateUser(){
+//     map.addControl(new mapboxgl.GeolocateControl({
+//         positionOptions: {
+//             enableHighAccuracy: true
+//         },
+//         trackUserLocation: false
+//     }));
+// }
 function main() {
     let breweriesInLocalStorage = loadBreweries();
     if (breweriesInLocalStorage) {
@@ -101,6 +110,7 @@ function main() {
             retrievePageOfBreweries(pageNumber);
         }
     } 
-    addAllPinsToMap()
+    addAllPinsToMap();
+    // geoLocateUser();
 }
 main()
