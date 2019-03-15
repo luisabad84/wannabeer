@@ -7,10 +7,47 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
     <title>wannabeer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 
-<div class="map" id='map' style='width: 400px; height: 300px;'></div>
+
+    <div class="main container">
+        <div class="top-header">
+                <button class="home-btn">Home</button>   <button class="map-btn">Map</button> <button class="chart-btn">Chart</button> 
+                <form type="search" aria-placeholder="search for breweries"></form>
+        </div>
+        <div class="logo-container">
+            <img class="logo-img"src="images/logo.jpg" width="350" height="300" />
+        </div>
+        <div class="body-container">
+            <h1>Welcome Users</h1>
+            <h2>Breweries Near You</h2>
+
+            <div class="map" id='map' style='width: 430px; height: 330px;'> </div>
+
+            <button>Button</button>
+
+            <div class="chart-container">
+                <h3>Get Your Beer On!</h3>
+                <div class="list-of-brewers">
+                    <p>left</p>
+                </div>
+                <div class="info">
+                    <p>right</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>footer</p>
+        </div>
+    </div>
+
+
+
+
 <script src="scripts/index.js"></script>
 </body>
 </html>   
