@@ -1,7 +1,15 @@
 //console.log("testing 123")
 
 let allBreweriesList = []
-
+// drawing th map to  the screen
+mapboxgl.accessToken = 'pk.eyJ1IjoiamJvZXJuZXI1NiIsImEiOiJjanQ5enp3OW0wMTBnNDRwNGRxOHN4OWczIn0.R8Q3ymvlpjg6gyshPanT0Q';
+let map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+// default center for where the map loads
+center: [-96,37.8],
+zoom: 3
+});
 // Sets the url for the breweries API so we can get all the pages of data
 function urlForThePage(pageNumber = 0) {
     return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
@@ -79,8 +87,8 @@ function storeBreweries(arrayOfBreweries) {
 }
 // adds pins for brewery onto map
 function addSinglePinToMap(breweryObject){
-let breweryLng = allBreweriesList[0].longitude;
-let breweryLat = allBreweriesList[0].latitude;
+let breweryLng = breweryObject.longitude;
+let breweryLat = breweryObject.latitude;
 let breweryLocation = [breweryLng, breweryLat]
 let marker = new mapboxgl.Marker()
     .setLngLat(breweryLocation)
@@ -88,6 +96,16 @@ let marker = new mapboxgl.Marker()
 }
 function addAllPinsToMap(breweries=allBreweriesList){
     breweries.forEach(addSinglePinToMap);
+}
+
+function geoLocateUser(){
+    map.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: false,
+        showUserLocation: true
+    }));
 }
 
 function main() {
@@ -101,6 +119,7 @@ function main() {
             retrievePageOfBreweries(pageNumber);
         }
     } 
-    addAllPinsToMap()
+    addAllPinsToMap();
+    geoLocateUser();
 }
 main()
