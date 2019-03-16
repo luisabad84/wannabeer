@@ -1,5 +1,3 @@
-//console.log("testing 123")
-
 let allBreweriesList = []
 
 // function that takes in geolocation position data and returns the lng and lat of the position
@@ -98,6 +96,7 @@ function success(pos) {
         const jsondata = JSON.stringify(arrayOfBreweries);
         localStorage.setItem("breweries-data", jsondata)
     }
+    // adds pins for brewery onto map    
     function addSinglePinToMap(breweryObject){
         let breweryLng = breweryObject.longitude;
         let breweryLat = breweryObject.latitude;
@@ -109,18 +108,8 @@ function success(pos) {
         function addAllPinsToMap(breweries=allBreweriesList){
             breweries.forEach(addSinglePinToMap);
         }
-    // adds pins for brewery onto map
-    // function addSinglePinToMap(breweryObject){
-    // let breweryLng = breweryObject.longitude;
-    // let breweryLat = breweryObject.latitude;
-    // let breweryLocation = [breweryLng, breweryLat]
-    // let marker = new mapboxgl.Marker()
-    //     .setLngLat(breweryLocation)
-    //     .addTo(map);
-    // }
-    // function addAllPinsToMap(breweries=allBreweriesList){
-    //     breweries.forEach(addSinglePinToMap);
-    // }
+
+
     
     function geoLocateUser(){
         let map1 = map.addControl(new mapboxgl.GeolocateControl({
