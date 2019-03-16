@@ -14,19 +14,21 @@ function success(pos) {
     let lnglat = [crd.longitude, crd.latitude];
     console.log(lnglat);
     return lnglat
+    
 }
-
+navigator.geolocation.getCurrentPosition(success);
+console.log(lnglat);
 // The below example will cause the do_something() function to execute when the location is obtained. for example we would do the open cage fetch function after so it took in the starting coordinates
 // navigator.geolocation.getCurrentPosition(function(position) {
 //     do_something(position.coords.latitude, position.coords.longitude);
 // });
 
 // sets the url needed to fetch from openCage taking geolocation data as input 
-let openCageFetchURL = navigator.geolocation.getCurrentPosition(function(position) {
-    urlForOpenCage(position.coords.latitude, position.coords.longitude);
-    // returns the url for the fetch request to be used for openCage
-        return `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=871a913950c844ea9cde99be4d2094b6`
-});
+// let openCageFetchURL = navigator.geolocation.getCurrentPosition(function(position) {
+//     urlForOpenCage(position.coords.latitude, position.coords.longitude);
+//     // returns the url for the fetch request to be used for openCage
+//         return `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=871a913950c844ea9cde99be4d2094b6`
+// });
 
 
 // drawing th map to  the screen
@@ -35,8 +37,9 @@ let map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/streets-v11',
 // default center for where the map loads
-center: [-96,37.8],
-zoom: 3
+
+center: [0,0],
+zoom: 6
 });
 // Sets the url for the breweries API so we can get all the pages of data
 function urlForThePage(pageNumber = 0) {
@@ -128,10 +131,10 @@ function addAllPinsToMap(breweries=allBreweriesList){
 
 function geoLocateUser(){
     let map1 = map.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-            enableHighAccuracy: true
-        },
-        trackUserLocation: false,
+        // positionOptions: {
+        //     enableHighAccuracy: true
+        // },
+        // trackUserLocation: false,
         showUserLocation: true
     }));
     console.log(map1)
