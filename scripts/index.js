@@ -107,7 +107,7 @@ function success(pos) {
         let breweryLocation = [breweryLng, breweryLat]
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
-            .setPopup(new mapboxgl.Popup({offset:0})
+            .setPopup(new mapboxgl.Popup({offset:20})
             .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.website_url + '</p>'))
             .addTo(map);
         }
