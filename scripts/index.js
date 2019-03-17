@@ -21,6 +21,27 @@ function success(pos) {
     center: lnglat,
     zoom: 6
     });
+    
+    function addBreweryDataToSinglePin() {
+        map.on('click', function(details) {
+            let features = map.queryRenderedFeatures(details.point, {
+            layers: ['brewery-data']
+            });
+        
+            if (!features.length) {
+            return;
+            }
+        
+            let feature = features[0];
+        
+            let popup = new mapboxgl.Popup({ offset: [0, -15] })
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+            .setLngLat(feature.geometry.coordinates)
+            .addTo(map);
+        });
+    }
+
 
     function urlForThePage(pageNumber = 0) {
         return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
@@ -134,6 +155,7 @@ function success(pos) {
         } 
         addAllPinsToMap();
         geoLocateUser();
+        addBreweryDataToSinglePin();
     }
     main()
 }
