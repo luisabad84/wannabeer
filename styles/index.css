@@ -84,6 +84,14 @@ background-color: #1f2833;
     border-style: solid;
     border-width: 3px;
     margin-left: 5px;
+
+}
+/* styling for the mapbox popups */
+/* .mapboxgl-popup-content{
+
+} */
+
     /* padding-top: 120px;
     padding-bottom: 120px; */
 }
+
