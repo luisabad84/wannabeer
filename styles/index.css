@@ -1,21 +1,42 @@
 .top-header {
-    border-style: solid;
-    border-width: 3px;
-
+margin-left: 10px;
+margin-right: 10px;
+/* border-style: solid;
+border-width: 1px; */
+position: fixed;
+background-color: white;
+box-shadow: 0 0 30px #777777;
+border-radius: 0px 0px 15px 15px;
+font-size: 16px;
+padding-top: 5px;
+padding-bottom: 5px;
+/* z-index: 3; */
 }
-.logo-container {
-    border-style: solid;
-    border-width: 3px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.Wannabeer {
+    position: fixed;
+    top: 300px;
+    left: 100px;
+    color: white;
+    font-size: 50px;
 }
-.logo-img {
-    margin-left: 80px;
+.img-container {
+    background-image: url(../images/barrel.jpg);
+    /* border-style: solid; */
+    /* border-width: 3px; */
+    background-size: cover;
+    background-position: center;
+    padding-top: 300px;
+    padding-bottom: 300px;
+    /* z-index: 1; */
 }
 .body-container {
-    border-style: solid;
-    border-width: 3px;
-    margin-bottom: 3px;
+    /* margin-top: 500px; */
+    /* border-style: solid;
+    border-width: 3px; */
+    /* bottom: 25px; */
+    position: relative;
+    /* z-index: 3; */
+    border-radius: 15px 15px 15px 15px;
 }
 .chart-container {
     border-style: solid;
@@ -46,4 +67,6 @@
     border-style: solid;
     border-width: 3px;
     margin-left: 5px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
