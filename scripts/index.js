@@ -22,25 +22,6 @@ function success(pos) {
     zoom: 6
     });
     
-    function addBreweryDataToSinglePin() {
-        map.on('click', function(details) {
-            let features = map.queryRenderedFeatures(details.point, {
-            layers: ['brewery-data']
-            });
-        
-            if (!features.length) {
-            return;
-            }
-        
-            let feature = features[0];
-        
-            let popup = new mapboxgl.Popup({ offset: [0, -15] })
-            .setLngLat(feature.geometry.coordinates)
-            .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
-            .setLngLat(feature.geometry.coordinates)
-            .addTo(map);
-        });
-    }
 
 
     function urlForThePage(pageNumber = 0) {
@@ -117,6 +98,8 @@ function success(pos) {
         const jsondata = JSON.stringify(arrayOfBreweries);
         localStorage.setItem("breweries-data", jsondata)
     }
+
+    
     // adds pins for brewery onto map    
     function addSinglePinToMap(breweryObject){
         let breweryLng = breweryObject.longitude;
@@ -124,6 +107,8 @@ function success(pos) {
         let breweryLocation = [breweryLng, breweryLat]
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
+            .setPopup(new mapboxgl.Popup({offset:0})
+            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.website_url + '</p>'))
             .addTo(map);
         }
         function addAllPinsToMap(breweries=allBreweriesList){
@@ -155,7 +140,6 @@ function success(pos) {
         } 
         addAllPinsToMap();
         geoLocateUser();
-        addBreweryDataToSinglePin();
     }
     main()
 }
