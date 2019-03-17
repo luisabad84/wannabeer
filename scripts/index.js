@@ -108,7 +108,7 @@ function success(pos) {
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
             .setPopup(new mapboxgl.Popup({offset:20})
-            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p><p>' + breweryObject.city +'<p></p>' + breweryObject.website_url + '</p>'))
+            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p><p>' + breweryObject.city + breweryObject.state + '<p></p>' + breweryObject.website_url + '</p>'))
             .addTo(map);
         }
         function addAllPinsToMap(breweries=allBreweriesList){
