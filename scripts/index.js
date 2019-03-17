@@ -21,6 +21,8 @@ function success(pos) {
     center: lnglat,
     zoom: 6
     });
+    
+
 
     function urlForThePage(pageNumber = 0) {
         return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
@@ -96,6 +98,8 @@ function success(pos) {
         const jsondata = JSON.stringify(arrayOfBreweries);
         localStorage.setItem("breweries-data", jsondata)
     }
+
+    
     // adds pins for brewery onto map    
     function addSinglePinToMap(breweryObject){
         let breweryLng = breweryObject.longitude;
@@ -103,6 +107,8 @@ function success(pos) {
         let breweryLocation = [breweryLng, breweryLat]
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
+            .setPopup(new mapboxgl.Popup({offset:20})
+            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.website_url + '</p>'))
             .addTo(map);
         }
         function addAllPinsToMap(breweries=allBreweriesList){
