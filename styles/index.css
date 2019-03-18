@@ -100,6 +100,7 @@ body {
     border-style: solid;
     border-width: 3px;
     margin-left: 5px;
+<<<<<<< HEAD
     /* padding-top: 150px;
     padding-bottom: 150px; */
 }
@@ -122,6 +123,15 @@ body {
     color: white;
     font-size: 20px;
     margin-left: 60px;
+}
+
+.mapboxgl-popup-content {
+    color: black;
+    max-width: 200px;
+} 
+.mapboxgl-popup p{
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* 
