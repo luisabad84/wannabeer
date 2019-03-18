@@ -107,10 +107,8 @@ function success(pos) {
         let breweryLocation = [breweryLng, breweryLat]
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
-            .setPopup(new mapboxgl.Popup({offset:20})
-            // how to add a space between city and state?
-            // how to make website into a clickable link?
-            .setHTML('<h3>' + breweryObject.name + '</h3>' + breweryObject.street + '<p>' + breweryObject.city + breweryObject.state +'</p>' + '<p>' + '<a' + 'href=breweryObject.website_url' + '>' + breweryObject.website_url + '</a>' + '</p>'))
+            .setPopup(new mapboxgl.Popup({offset:5})
+            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p>' + breweryObject.city + ', ' + breweryObject.state +'</p><p><a href= "' + breweryObject.website_url + '">' + breweryObject.website_url + '<a/></p>'))
             .addTo(map);
         }
 
