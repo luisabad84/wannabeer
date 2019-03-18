@@ -83,25 +83,62 @@ function success(pos) {
     
     // function takes object from brewery api and pulls its info to display
     function drawBreweryDataToDetail(breweryObject) {
-        console.log(breweryObject)
+
+        const detailArea = document.querySelector('[data-brewery]');
+        detailArea.textContent = '';
+
+        const breweryName = document.createElement('div');
+        const breweryType = document.createElement('div');
+        const breweryStreet = document.createElement('div');
+        const breweryState = document.createElement('div');
+        const breweryZip = document.createElement('div');
+        const breweryPhone = document.createElement('div');
+        const breweryWebsite = document.createElement('div');
+        debugger;
+        breweryName.textContent = `Name: ${breweryObject.name}`;
+        breweryType.textContent = `Type: ${breweryObject.brewery_type}`;
+        breweryStreet.textContent = `Street: ${breweryObject.street}`;
+        breweryState.textContent = `State: ${breweryObject.state}`;
+        breweryZip.textContent = `Zip Code: ${breweryObject.postal_code}`;
+        breweryPhone.textContent = `Phone Number: ${breweryObject.phone}`;
+        breweryWebsite.textContent = `Website: ${breweryObject.website_url}`;
+            
+        detailArea.appendChild(breweryName);
+        detailArea.appendChild(breweryType);
+        detailArea.appendChild(breweryStreet);
+        detailArea.appendChild(breweryState);
+        detailArea.appendChild(breweryZip);
+        detailArea.appendChild(breweryPhone);
+        detailArea.appendChild(breweryWebsite);
     }
     
     // function takes object from brewery api and draws the name of that object to our state brewery list at bottom of page
     function drawSingleBreweryListByStateToList(breweryObject) {
-        console.log(breweryObject)
         // from the object we grab the breweries name
-        const breweryName = breweryObject.name
-        // if brewery doesnt have a name or it cant be pulled we returns nothing 
-        if (breweryName.length === 0) {
-            return;
-        }
+        const breweryName = breweryObject.name;
+        // // if brewery doesnt have a name or it cant be pulled we returns nothing 
+        // if (breweryName.length === 0) {
+        //     return;
+        // }
         // creating a new anchor element and setting the element name
-        const anchorElement = document.createElement('brewery-Names');
+        const anchorElement = document.createElement('li');
         // set the new elements text to the name of the brewery
         anchorElement.textContent = breweryName;
     
         // we need to add ability to click on those names and have the details pull up
-    
+        anchorElement.addEventListener('click', function () {
+            drawBreweryDataToDetail(breweryObject);
+        });
+        const listItem = document.createElement('li');
+        listItem.appendChild(anchorElement);
+
+        const listArea = document.querySelector('[data-detail]');
+        listArea.appendChild(listItem);
+    }
+    function drawListOfBreweries(breweries=allBreweriesList){
+        const listArea = document.querySelector('[data-brewery]');
+        listArea.textContent = '';
+        breweries.forEach(drawSingleBreweryListByStateToList);
     }
     
     // function drawBreweryListByStateToList(breweries=allBreweriesList) {
@@ -173,7 +210,7 @@ function success(pos) {
             allBreweriesList = [
                 ...breweriesInLocalStorage
             ];
-        // if we don not have breweriesInLocalStorage we must run the fetch request to get info
+            drawListOfBreweries();
         } else {
             // for loop representing the maximum total pages so we can grab all the pages info
             for (pageNumber= 0; pageNumber <= 161 ; pageNumber++) {
@@ -181,14 +218,12 @@ function success(pos) {
                 retrievePageOfBreweries(pageNumber);
             }
         }
-        // calls addAllPinsToMap so the map will display the markers
         addAllPinsToMap();
-        // calls geoLocateUser so our map will have the geolocation features
         geoLocateUser();
+        // drawBreweryDataToDetail(allBreweriesList);
+        drawSingleBreweryListByStateToList();
     }
-    // geoLocateUser();
     main();
-    // addAllPinsToMap();
 }
 // calls the geolocation API to ask the user for their geolocation data, takes in success, which represents a sucessful retreval of the geolocation data
 // this starts our code and is first thing needed as if we dont have userposition we cannot do what is needed.
