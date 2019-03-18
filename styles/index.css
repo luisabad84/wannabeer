@@ -1,24 +1,43 @@
-html {
-    background-color: #1f2833;
+html, 
+body {
     color: white;
+    background-image: url(../images/barrel.jpg);
+    /* background-size: cover; */
+    background-position: center;
+    /* padding-top: 300px; */
+    /* padding-bottom: 300px;
+    display: flex;
+    flex-direction: column; */
+     /* Set a specific height */
+    height: 100%; 
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-
 .top-header {
-margin-left: 20px;
-/* margin-right: 4px; */
-/* border-style: solid;
-border-width: 1px; */
-position: fixed;
-background-color: white;
-box-shadow: 0 0 30px #777777;
-border-radius: 0px 0px 15px 15px;
-font-size: 16px;
-padding-top: 5px;
-padding-bottom: 5px;
-/* z-index: 3; */
-background-color: #1f2833;
+    margin-left: 10px;
+    margin-right: 10px;
+    /* position: fixed; */
+    background-color: white;
+    box-shadow: 0 0 30px #777777;
+    border-radius: 15px 15px 15px 15px;
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 3;
+    background-color: #494a4c;
+    margin-top: 0px;
 }
+.Wannabeer {
+    /* outline: 1px solid red; */
+    margin-top: 550px;
+    margin-bottom: 0;
+}
+
+
+
 .home-btn, .map-btn, .chart-btn {
     color: white;
 }
@@ -34,26 +53,17 @@ background-color: #1f2833;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-}
-.img-container {
-    background-image: url(../images/barrel.jpg);
-    /* border-style: solid; */
-    /* border-width: 3px; */
-    background-size: cover;
-    background-position: center;
-    padding-top: 300px;
-    padding-bottom: 300px;
-    display: flex;
-    flex-direction: column;
-}
-.body-container {
     /* margin-top: 500px; */
-    /* border-style: solid;
-    border-width: 3px; */
-    /* bottom: 25px; */
+}
+
+.body-container {
     position: relative;
-    /* z-index: 3; */
+    /* top: 100px; */
     border-radius: 15px 15px 15px 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #494a4c;
+    box-shadow: 0 0 30px #777777;
 }
 .chart-container {
     border-style: solid;
@@ -76,16 +86,45 @@ background-color: #1f2833;
     margin-bottom: 3px;
 }
 .footer {
-    border-style: solid;
-    border-width: 3px;
-    margin-bottom: 3px;
+    /* border-style: solid; */
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    background-color: #494a4c;
+    position: relative;
+    box-shadow: 0 0 30px #777777;
+    margin-top: 30px;
 }
 .map {
     border-style: solid;
     border-width: 3px;
     margin-left: 5px;
-
+<<<<<<< HEAD
+    /* padding-top: 150px;
+    padding-bottom: 150px; */
 }
+.welcome {
+    font-size: 45px;
+    margin-left: 45px;
+}
+.near-you {
+    margin-left: 100px;
+}
+.beer-on {
+    font-size: 20px;
+    margin-left: 85px;
+}
+.copy-right {
+    font-size: 25px;
+    margin-left: 110px;
+}
+.about-btn, .contact-btn {
+    color: white;
+    font-size: 20px;
+    margin-left: 60px;
+}
+
 .mapboxgl-popup-content {
     color: black;
     max-width: 200px;
@@ -95,3 +134,97 @@ background-color: #1f2833;
     margin-bottom: 0;
 }
 
+/* 
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+/* Spinner */
+.lds-spinner {
+    color: official;
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+.lds-spinner div {
+    transform-origin: 32px 32px;
+    animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 29px;
+    width: 5px;
+    height: 14px;
+    border-radius: 20%;
+    /* background: #cef; */
+}
+.lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+}
+@keyframes lds-spinner {
+    0% {
+    opacity: 1;
+}
+    100% {
+    opacity: 0;
+}
+}
