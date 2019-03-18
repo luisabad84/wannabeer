@@ -19,7 +19,7 @@ function success(pos) {
     // default center for where the map loads
 
     center: lnglat,
-    zoom: 6
+    zoom: 12,
     });
     
 
@@ -40,7 +40,7 @@ function success(pos) {
         storeBreweries(allBreweriesList);
     
         // We know there are no more breweries to load
-        // when the APU sends us empty array
+        // when the API sends us empty array
         if (theActualData.length === 0) {
             // when all breweries info has been stored call main function again
             main();
@@ -108,9 +108,12 @@ function success(pos) {
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
             .setPopup(new mapboxgl.Popup({offset:20})
-            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.website_url + '</p>'))
+            // how to add a space between city and state?
+            // how to make website into a clickable link?
+            .setHTML('<h3>' + breweryObject.name + '</h3>' + breweryObject.street + '<p>' + breweryObject.city + breweryObject.state +'</p>' + '<p>' + '<a' + 'href=breweryObject.website_url' + '>' + breweryObject.website_url + '</a>' + '</p>'))
             .addTo(map);
         }
+
         function addAllPinsToMap(breweries=allBreweriesList){
             breweries.forEach(addSinglePinToMap);
         }
@@ -119,14 +122,15 @@ function success(pos) {
     
     function geoLocateUser(){
         let map1 = map.addControl(new mapboxgl.GeolocateControl({
-            // positionOptions: {
-            //     enableHighAccuracy: true
-            // },
-            // trackUserLocation: false,
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
             showUserLocation: true
         }));
         console.log(map1)
     }
+
     function main() {
         let breweriesInLocalStorage = loadBreweries();
         if (breweriesInLocalStorage) {
@@ -137,11 +141,13 @@ function success(pos) {
             for (pageNumber= 0; pageNumber <= 161 ; pageNumber++) {
                 retrievePageOfBreweries(pageNumber);
             }
-        } 
-        addAllPinsToMap();
-        geoLocateUser();
+        }
+        // addAllPinsToMap();
+        // geoLocateUser();
     }
-    main()
+    geoLocateUser();
+    main();
+    addAllPinsToMap();
 }
 navigator.geolocation.getCurrentPosition(success);
 
