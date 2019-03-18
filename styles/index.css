@@ -86,14 +86,12 @@ background-color: #1f2833;
     margin-left: 5px;
 
 }
-/* styling for the mapbox popups */
-/* .mapboxgl-popup-content{
+.mapboxgl-popup-content {
+    color: black;
+    max-width: 200px;
+} 
+.mapboxgl-popup p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
-} */
-
-    /* padding-top: 120px;
-    padding-bottom: 120px; */
-    
-    .mapboxgl-popup-content {
-        color: black;
-    }
