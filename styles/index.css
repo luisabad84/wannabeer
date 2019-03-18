@@ -191,6 +191,11 @@ body {
 
 
 
+
+
+
+
+
 @media screen and (min-width: 360px) {
     /* in here you put the changes you want for this size */
 
@@ -208,8 +213,8 @@ body {
         margin-left: 85px;
     }
     .map {
-        width: 338.7px;
-        height: 338.7px;
+        width: 340px;
+        height: 340px;
     }
 
 }
