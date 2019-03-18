@@ -108,8 +108,7 @@ function success(pos) {
         let marker = new mapboxgl.Marker()
             .setLngLat(breweryLocation)
             .setPopup(new mapboxgl.Popup({offset:5})
-            // how to make website into a clickable link?
-            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p>' + breweryObject.city + breweryObject.state +'</p><p><a href= "' + breweryObject.website_url + '">' + breweryObject.website_url + '</a></p>'))
+            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p>' + breweryObject.city + ', ' + breweryObject.state +'</p><p><a href= "' + breweryObject.website_url + '">' + breweryObject.website_url + '<a/></p>'))
             .addTo(map);
         }
 
