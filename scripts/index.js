@@ -16,7 +16,7 @@ function success(pos) {
     // saves the users coords in local storage so they can be accessed by other functions
     localStorage.setItem("userCoords", lnglat);
     // console log lnglat to make sure the data is in form we wanted
-    console.log(lnglat);
+    // console.log(lnglat);
     
     // this calls our map api and returns a map based on our criteria
     mapboxgl.accessToken = 'pk.eyJ1IjoiamJvZXJuZXI1NiIsImEiOiJjanQ5enp3OW0wMTBnNDRwNGRxOHN4OWczIn0.R8Q3ymvlpjg6gyshPanT0Q';
@@ -32,7 +32,6 @@ function success(pos) {
         zoom: 12,
     });
     
-
     // function that takes in page number and then returns url to fetch that pages information from API
     function urlForThePage(pageNumber = 0) {
         // returns the default api needed to fetch data from OpenBrewery, inserts the page number so we can grab all data not just first page
@@ -42,7 +41,7 @@ function success(pos) {
     
     // Takes in theActualData (response from Brewery API) then adds the information to allBreweriesList
     function acumilateBreweries(theActualData) {
-        console.log(theActualData);
+        // console.log(theActualData);
         allBreweriesList = [
             ...allBreweriesList, 
             ...theActualData
@@ -68,10 +67,10 @@ function success(pos) {
         return arrayOfBreweries
     }
     
-    // Takes in a page number and then fetches or requests that page from the breweries API
+    // Takes in a page number and then fetches that page from the breweries API
     function retrievePageOfBreweries(pageNumber){
-        // fetches data from Brewery API, takes urlForThePage(pageNumber) as inputs, urlforpage is the function that generates our urls needed to fetch
-        // the page number represents the specific page of data that is being taken as the API only allows us to grab 50 results at a time per page
+        // fetches data from Brewery API, takes urlForThePage(pageNumber) as inputs, urlforpage is the function that generates our urls needed to fetch.
+        // the page number represents the specific page of data that is being taken as the API only allows us to grab 50 results at a time
         fetch(urlForThePage(pageNumber))
         // returns the fetch response and converts to json
         .then(function (response) {
@@ -94,7 +93,7 @@ function success(pos) {
         const breweryZip = document.createElement('div');
         const breweryPhone = document.createElement('div');
         const breweryWebsite = document.createElement('div');
-        debugger;
+
         breweryName.textContent = `Name: ${breweryObject.name}`;
         breweryType.textContent = `Type: ${breweryObject.brewery_type}`;
         breweryStreet.textContent = `Street: ${breweryObject.street}`;
@@ -113,33 +112,37 @@ function success(pos) {
     }
     
     // function takes object from brewery api and draws the name of that object to our state brewery list at bottom of page
-    function drawSingleBreweryListByStateToList(breweryObject) {
+    function drawSingleBreweryByStateToList(breweryObject) {
         // from the object we grab the breweries name
-        const breweryName = breweryObject.name;
-        // // if brewery doesnt have a name or it cant be pulled we returns nothing 
-        // if (breweryName.length === 0) {
-        //     return;
-        // }
+        let breweryName = breweryObject.name;
+        // if brewery doesnt have a name or it cant be pulled we return 'name not found'
+        if (breweryName.length === 0) {
+            breweryName = "Name not found";
+        }
         // creating a new anchor element and setting the element name
         const anchorElement = document.createElement('li');
         // set the new elements text to the name of the brewery
         anchorElement.textContent = breweryName;
     
-        // we need to add ability to click on those names and have the details pull up
+        // we need to add ability to click on name in list and have the details pull up
         anchorElement.addEventListener('click', function () {
             drawBreweryDataToDetail(breweryObject);
         });
+
         const listItem = document.createElement('li');
         listItem.appendChild(anchorElement);
 
         const listArea = document.querySelector('[data-detail]');
         listArea.appendChild(listItem);
     }
+
     function drawListOfBreweries(breweries=allBreweriesList){
         const listArea = document.querySelector('[data-brewery]');
         listArea.textContent = '';
-        breweries.forEach(drawSingleBreweryListByStateToList);
+        breweries.forEach(drawSingleBreweryByStateToList);
     }
+
+
     
     // function drawBreweryListByStateToList(breweries=allBreweriesList) {
     //     console.log(breweryObject)
@@ -155,7 +158,6 @@ function success(pos) {
         localStorage.setItem("breweries-data", jsondata)
     }
 
-    
     // function to add a single pin to the map which represents a breweries location, it takes in a single breweryObject   
     function addSinglePinToMap(breweryObject){
         // sets variable for longitude of the brewery object
@@ -164,6 +166,7 @@ function success(pos) {
         let breweryLat = breweryObject.latitude;
         // sets variable to hold lng and lat in format we need so we can use this variable in order to add a marker at that loction to the map
         let breweryLocation = [breweryLng, breweryLat]
+
         // sets variable to represent our markers on the map
         let marker = new mapboxgl.Marker()
         // sets the lng and lat of the brewery so the map knows where the pin goes
@@ -197,7 +200,7 @@ function success(pos) {
             // enables user to click button and show a dot of themselves and will track them
             showUserLocation: true
         }));
-        console.log(map1)
+        // console.log(map1)
     }
 
     // main function that will call our other functions and ensure order is correct
@@ -220,12 +223,10 @@ function success(pos) {
         }
         addAllPinsToMap();
         geoLocateUser();
-        // drawBreweryDataToDetail(allBreweriesList);
-        drawSingleBreweryListByStateToList();
+        // drawSingleBreweryListByStateToList(allBreweriesList);
     }
     main();
 }
 // calls the geolocation API to ask the user for their geolocation data, takes in success, which represents a sucessful retreval of the geolocation data
 // this starts our code and is first thing needed as if we dont have userposition we cannot do what is needed.
 navigator.geolocation.getCurrentPosition(success);
-
