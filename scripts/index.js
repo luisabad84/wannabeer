@@ -1,4 +1,5 @@
 let allBreweriesList = []
+let userLocation = []
 
 // function takes in response from calling geolocation API and runs if it is sucessful
 function success(pos) {
@@ -15,8 +16,11 @@ function success(pos) {
     let lnglat = [crd.longitude, crd.latitude];
     // saves the users coords in local storage so they can be accessed by other functions
     localStorage.setItem("userCoords", lnglat);
+    localStorage.setItem("userlat", lnglat[1]);
+    localStorage.setItem("userlng", lnglat[0]);
     // console log lnglat to make sure the data is in form we wanted
     console.log(lnglat);
+    // return so it can be used for the opencage url fetch request
     
     // this calls our map api and returns a map based on our criteria
     mapboxgl.accessToken = 'pk.eyJ1IjoiamJvZXJuZXI1NiIsImEiOiJjanQ5enp3OW0wMTBnNDRwNGRxOHN4OWczIn0.R8Q3ymvlpjg6gyshPanT0Q';
@@ -31,18 +35,49 @@ function success(pos) {
         // amount of default zoom that the map will load with
         zoom: 12,
     });
-    
+
+//     function openCageUrl() {
+//         let userLat = localStorage.getItem("userlat");
+//         let userLng = localStorage.getItem("userlng");
+//         let openCageUrl = `https://api.opencagedata.com/geocode/v1/json?q=${userLat}+${userLng}&key=c9993d9230524707adae30e1518872f6`;
+//         return openCageUrl;
+//     }
+
+
+//     function openCageFetch() {
+//         fetch(openCageUrl())
+//         .then(function (response) {
+//             return (response.json())
+//         })
+//         .then(userState);
+// // results.components.state
+//     }
 
     // function that takes in page number and then returns url to fetch that pages information from API
     function urlForThePage(pageNumber = 0) {
         // returns the default api needed to fetch data from OpenBrewery, inserts the page number so we can grab all data not just first page
         return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
     }
-    
+    // function userState (actualLocation){
+    //     userLocation = [
+    //         ...userLocation,
+    //         ...actualLocation
+    //     ];
+    //     storeUserLocation(userLocation);
+
+    //     if(actualLocation.length === 0){
+    //         main();
+    //     }
+    // }
+    // function storeUserLocation (location){
+    //     const jsonData = JSON.stringify(location);
+    //     localStorage.setItem("userLocation", jsonData)
+    //     console.log(jsonData);
+    // }
+
     
     // Takes in theActualData (response from Brewery API) then adds the information to allBreweriesList
-    function acumilateBreweries(theActualData) {
-        console.log(theActualData);
+    function accumulateBreweries(theActualData) {
         allBreweriesList = [
             ...allBreweriesList, 
             ...theActualData
@@ -57,7 +92,12 @@ function success(pos) {
             main();
         }
     }
-    
+    // function loadLocation() {
+    //     const jsonUserLocation = localStorage.getItem("userLoaction");
+    //     const arrayOfUserLocation = JSON.parse(jsonUserLocation)
+    //     return arrayOfUserLocation;
+    // }
+
     // function that will load brewery infomation by grabbing it out of local storage then parsing info back to array
     function loadBreweries() {
         // create variable to hold the data taken from breweries-data in local storage
@@ -78,7 +118,7 @@ function success(pos) {
             return response.json()
         }) 
         // calls accumulateBreweries function to add all Brewery API pages data allBreweriesList
-        .then(acumilateBreweries)
+        .then(accumulateBreweries)
     }
     
     // function takes object from brewery api and pulls its info to display
@@ -94,7 +134,6 @@ function success(pos) {
         const breweryZip = document.createElement('div');
         const breweryPhone = document.createElement('div');
         const breweryWebsite = document.createElement('div');
-        debugger;
         breweryName.textContent = `Name: ${breweryObject.name}`;
         breweryType.textContent = `Type: ${breweryObject.brewery_type}`;
         breweryStreet.textContent = `Street: ${breweryObject.street}`;
@@ -218,10 +257,20 @@ function success(pos) {
                 retrievePageOfBreweries(pageNumber);
             }
         }
+        // let userLocationInLocalStorage = loadLocation();
+        // if (userLocationInLocalStorage) {
+        //     userLocation = [
+        //         ...userLocationInLocalStorage
+        //     ];
+        // } 
+        // // use returned value to filter the allBreweriesList into the individual lists of each brewery by state.
+        // openCageFetch();
+        
+        
         addAllPinsToMap();
         geoLocateUser();
         // drawBreweryDataToDetail(allBreweriesList);
-        drawSingleBreweryListByStateToList();
+        
     }
     main();
 }
