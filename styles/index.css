@@ -55,13 +55,13 @@ body {
     border-width: 2px;
     border-radius: 15px 15px 0px 0px;
     box-shadow: 0 0 30px #161616;
-
 }
 .info {
     border-style: solid;
     border-width: 2px;
     border-radius: 0px 0px 15px 15px;
     box-shadow: 0 0 30px #161616;
+    overflow: scroll;
 }
 .list-of-brewers, .info {
     margin-bottom: 20px;
