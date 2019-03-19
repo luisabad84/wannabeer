@@ -1,4 +1,5 @@
 let allBreweriesList = []
+let breweriesInGeorgia = []
 
 // function takes in response from calling geolocation API and runs if it is sucessful
 function success(pos) {
@@ -34,10 +35,16 @@ function success(pos) {
     
     // function that takes in page number and then returns url to fetch that pages information from API
     function urlForThePage(pageNumber = 0) {
+        // https://api.openbrewerydb.org/breweries?by_state=georgia&page=${pageNumber}&per_page=50 - can use this to just get atl for demo to make site quick
         // returns the default api needed to fetch data from OpenBrewery, inserts the page number so we can grab all data not just first page
         return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
     }
     
+    function urlForThePageState(pageNumber = 0) {
+        // https://api.openbrewerydb.org/breweries?by_state=georgia&page=${pageNumber}&per_page=50 - can use this to just get atl for demo to make site quick
+        // returns the default api needed to fetch data from OpenBrewery, inserts the page number so we can grab all data not just first page
+        return `https://api.openbrewerydb.org/breweries?by_state=georgia&page=${pageNumber}&per_page=50`
+    }
     
     // Takes in theActualData (response from Brewery API) then adds the information to allBreweriesList
     function acumilateBreweries(theActualData) {
@@ -71,7 +78,7 @@ function success(pos) {
     function retrievePageOfBreweries(pageNumber){
         // fetches data from Brewery API, takes urlForThePage(pageNumber) as inputs, urlforpage is the function that generates our urls needed to fetch.
         // the page number represents the specific page of data that is being taken as the API only allows us to grab 50 results at a time
-        fetch(urlForThePage(pageNumber))
+        fetch(urlForThePageState(pageNumber))
         // returns the fetch response and converts to json
         .then(function (response) {
             return response.json()
@@ -116,9 +123,9 @@ function success(pos) {
         // from the object we grab the breweries name
         let breweryName = breweryObject.name;
         // if brewery doesnt have a name or it cant be pulled we return 'name not found'
-        if (breweryName.length === 0) {
-            breweryName = "Name not found";
-        }
+        // if (breweryName.length === 0) {
+        //     breweryName = "Name not found";
+        // }
         // creating a new anchor element and setting the element name
         const anchorElement = document.createElement('li');
         // set the new elements text to the name of the brewery
@@ -142,7 +149,6 @@ function success(pos) {
         breweries.forEach(drawSingleBreweryByStateToList);
     }
 
-
     
     // function drawBreweryListByStateToList(breweries=allBreweriesList) {
     //     console.log(breweryObject)
@@ -165,19 +171,35 @@ function success(pos) {
         // sets variable to hold latitude for the brewery object
         let breweryLat = breweryObject.latitude;
         // sets variable to hold lng and lat in format we need so we can use this variable in order to add a marker at that loction to the map
-        let breweryLocation = [breweryLng, breweryLat]
+        let breweryLocation = [breweryLng, breweryLat];
+
 
         // sets variable to represent our markers on the map
         let marker = new mapboxgl.Marker()
         // sets the lng and lat of the brewery so the map knows where the pin goes
+            // .on("click", drawBreweryDataToDetail(breweryObject))
             .setLngLat(breweryLocation)
             // enables us to have a popup window when a marker is clicked
-            .setPopup(new mapboxgl.Popup({offset:5})
+            .setPopup(new mapboxgl.Popup({offset:5, })
             // sets the test of the popup box on the map
             .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p>' + breweryObject.city + ', ' + breweryObject.state +'</p><p><a href= "' + breweryObject.website_url + '">' + breweryObject.website_url + '<a/></p>'))
             // adds the marker to the map
             .addTo(map);
+
+
+            // .on("click", drawBreweryDataToDetail(breweryObject));
         }
+        
+        // // create DOM element for the marker
+        // var el = document.createElement('div');
+        // el.innerHTML = "Marker1";
+        // el.id = 'marker';
+
+        // // create the marker
+        // new mapboxgl.Marker(el, {offset:[-25, -25]})
+        // .setLngLat(monument)
+        // .setPopup(popup) // sets a popup on this marker
+        // .addTo(map);
 
         // function that takes in allbrewerieslist and runs addSinglePinToMap for each of the objects
         function addAllPinsToMap(breweries=allBreweriesList){
@@ -216,14 +238,14 @@ function success(pos) {
             drawListOfBreweries();
         } else {
             // for loop representing the maximum total pages so we can grab all the pages info
-            for (pageNumber= 0; pageNumber <= 161 ; pageNumber++) {
+            for (pageNumber= 0; pageNumber <= 10 ; pageNumber++) {
                 // calls retrievePageOfBreweries which takes pageNumber to actually get the data from BreweriesAPI
                 retrievePageOfBreweries(pageNumber);
             }
         }
         addAllPinsToMap();
         geoLocateUser();
-        // drawSingleBreweryListByStateToList(allBreweriesList);
+        // drawSingleBreweryByStateToList();
     }
     main();
 }
