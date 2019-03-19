@@ -9,7 +9,7 @@
 } */
 
 
-html, 
+html,
 body {
     color: white;
     background-image: url(../images/barrel.jpg);
@@ -41,8 +41,6 @@ body {
 }
 .Wannabeer {
     margin-bottom: 0;
-    margin: 0 auto;
-    text-align: center;
 }
 .body-container {
     position: relative;
@@ -52,19 +50,21 @@ body {
     width: 85%;
     margin: 0 auto;
 }
-.chart-container {
-    border-style: solid;
-    border-width: 3px;
-    margin-bottom: 5px;
-}
 .list-of-brewers {
     border-style: solid;
+    border-width: 2px;
+    border-radius: 15px 15px 0px 0px;
+    box-shadow: 0 0 30px #161616;
+
 }
 .info {
     border-style: solid;
+    border-width: 2px;
+    border-radius: 0px 0px 15px 15px;
+    box-shadow: 0 0 30px #161616;
 }
 .list-of-brewers, .info {
-    margin-bottom: 3px;
+    margin-bottom: 20px;
 }
 .footer {
     border-radius: 15px 15px 15px 15px;
@@ -89,7 +89,6 @@ body {
     text-align: center;
 }
 .near-you, #map1 {
-    font-size: 40px;
     width: 30%;
     margin: 0 auto;
     margin-bottom: 25px;
@@ -113,6 +112,10 @@ body {
     margin-bottom: 10px;
     border: none;
 }
+.map{
+    box-shadow: 0 0 40px #161616;
+    border-radius: 17px 17px 17px 17px;
+}
 
 
 
@@ -133,8 +136,9 @@ body {
         margin: 0 auto;
     }
     .Wannabeer {
-        /* margin-top: 300px; */
         font-size: 40px;
+        margin: 0 auto;
+        text-align: center;
     }
     .arrow-container {
         display: flex;
@@ -164,7 +168,13 @@ body {
     }
     .front-page {
         margin-top: 170px;
-        /* margin-bottom: 170px; */
+    }
+    .near-you {
+        font-size: 25px;
+    }
+    .chart-container {
+        width: 290px;
+        margin: 0 auto;
     }
 }
 
@@ -179,9 +189,9 @@ body {
         margin: 0 auto;
     }
     .Wannabeer {
-        /* margin-top: 330px; */
         font-size: 60px;
-        width: 30%
+        margin: 0 auto;
+        text-align: center;
     }
     .arrow-container {
         display: flex;
@@ -202,6 +212,13 @@ body {
     .front-page {
         margin-bottom: 70px; 
     }
+    .near-you {
+        font-size: 40px;
+    }
+    .chart-container {
+        width: 500px;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -216,6 +233,8 @@ body {
     }
     .Wannabeer {
         font-size: 90px;
+        margin: 0 auto;
+        text-align: center;
     }
     .arrow-container {
         display: flex;
@@ -235,5 +254,12 @@ body {
     }
     .front-page {
         margin-bottom: 180px;
+    }
+    .near-you {
+        font-size: 60px;
+    }
+    .chart-container {
+        width: 850px;
+        margin: 0 auto;
     }
 }
