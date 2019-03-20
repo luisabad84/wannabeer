@@ -7,10 +7,10 @@ function success(pos) {
     let crd = pos.coords;
 
     // console logging all values in pos.coords to see what the data is
-    console.log('Your current position is:');
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
-    console.log(`More or less ${crd.accuracy} meters.`);
+    // console.log('Your current position is:');
+    // console.log(`Latitude : ${crd.latitude}`);
+    // console.log(`Longitude: ${crd.longitude}`);
+    // console.log(`More or less ${crd.accuracy} meters.`);
     
     // sets the long and lat of users location so we can access later
     let lnglat = [crd.longitude, crd.latitude];
@@ -56,7 +56,7 @@ function success(pos) {
     // function that takes in page number and then returns url to fetch that pages information from API
     function urlForThePage(pageNumber = 0) {
         // returns the default api needed to fetch data from OpenBrewery, inserts the page number so we can grab all data not just first page
-        return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
+        return `https://api.openbrewerydb.org/breweries?by_state=georgia&page=${pageNumber}&per_page=50`
     }
     // function userState (actualLocation){
     //     userLocation = [
@@ -82,6 +82,9 @@ function success(pos) {
             ...allBreweriesList, 
             ...theActualData
         ];
+        console.log(allBreweriesList);
+        console.log(theActualData);
+        
         // use allBreweriesList which contains Brewery API Data and calls the store function to store data in local storage
         storeBreweries(allBreweriesList);
     
@@ -250,13 +253,15 @@ function success(pos) {
                 ...breweriesInLocalStorage
             ];
             drawListOfBreweries();
+            addAllPinsToMap();
         } else {
             // for loop representing the maximum total pages so we can grab all the pages info
-            for (pageNumber= 0; pageNumber <= 161 ; pageNumber++) {
+            for (pageNumber= 0; pageNumber <=3 ; pageNumber++) {
                 // calls retrievePageOfBreweries which takes pageNumber to actually get the data from BreweriesAPI
                 retrievePageOfBreweries(pageNumber);
             }
         }
+        debugger;
         // let userLocationInLocalStorage = loadLocation();
         // if (userLocationInLocalStorage) {
         //     userLocation = [
@@ -267,7 +272,7 @@ function success(pos) {
         // openCageFetch();
         
         
-        addAllPinsToMap();
+        
         geoLocateUser();
         // drawBreweryDataToDetail(allBreweriesList);
         
