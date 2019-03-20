@@ -156,9 +156,9 @@ function success(pos) {
         // from the object we grab the breweries name
         const breweryName = breweryObject.name;
         // // if brewery doesnt have a name or it cant be pulled we returns nothing 
-        // if (breweryName.length === 0) {
-        //     return;
-        // }
+        if (breweryName.length === 0) {
+            return;
+        }
         // creating a new anchor element and setting the element name
         const anchorElement = document.createElement('li');
         // set the new elements text to the name of the brewery
@@ -210,7 +210,7 @@ function success(pos) {
             // enables us to have a popup window when a marker is clicked
             .setPopup(new mapboxgl.Popup({offset:5})
             // sets the test of the popup box on the map
-            .setHTML('<h3>' + breweryObject.name + '</h3><p>' + breweryObject.street + '</p>' + breweryObject.city + ', ' + breweryObject.state +'</p><p><a href= "' + breweryObject.website_url + '">' + breweryObject.website_url + '<a/></p>'))
+            .setHTML('<h3>' + breweryObject.name + '</h3><p>'/* + breweryObject.street + '</p>' */+ breweryObject.city + ', ' + breweryObject.state +'</p><p><a href= "' + breweryObject.website_url + '">' + breweryObject.website_url + '<a/></p>'))
             // adds the marker to the map
             .addTo(map);
         }
@@ -250,9 +250,11 @@ function success(pos) {
                 ...breweriesInLocalStorage
             ];
             drawListOfBreweries();
+            addAllPinsToMap();
+            geoLocateUser();
         } else {
             // for loop representing the maximum total pages so we can grab all the pages info
-            for (pageNumber= 0; pageNumber <= 15 ; pageNumber++) {
+            for (pageNumber= 0; pageNumber <= 3 ; pageNumber++) {
                 // calls retrievePageOfBreweries which takes pageNumber to actually get the data from BreweriesAPI
                 retrievePageOfBreweries(pageNumber);
             }
@@ -266,9 +268,9 @@ function success(pos) {
         // // use returned value to filter the allBreweriesList into the individual lists of each brewery by state.
         // openCageFetch();
         
-        
-        addAllPinsToMap();
-        geoLocateUser();
+
+        // geoLocateUser();
+
         // drawBreweryDataToDetail(allBreweriesList);
         
     }
