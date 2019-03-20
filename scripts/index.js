@@ -182,7 +182,6 @@ function success(pos) {
         listArea.textContent = '';
         breweries.forEach(drawSingleBreweryListByStateToList);
     }
-    
     // function drawBreweryListByStateToList(breweries=allBreweriesList) {
     //     console.log(breweryObject)
     //     const listArea =  where the names list by state will be drawn
@@ -254,14 +253,14 @@ function success(pos) {
             ];
             drawListOfBreweries();
             addAllPinsToMap();
+            geoLocateUser();
         } else {
             // for loop representing the maximum total pages so we can grab all the pages info
-            for (pageNumber= 0; pageNumber <=3 ; pageNumber++) {
+            for (pageNumber= 0; pageNumber <=4 ; pageNumber++) {
                 // calls retrievePageOfBreweries which takes pageNumber to actually get the data from BreweriesAPI
                 retrievePageOfBreweries(pageNumber);
             }
         }
-        debugger;
         // let userLocationInLocalStorage = loadLocation();
         // if (userLocationInLocalStorage) {
         //     userLocation = [
@@ -273,7 +272,7 @@ function success(pos) {
         
         
         
-        geoLocateUser();
+        
         // drawBreweryDataToDetail(allBreweriesList);
         
     }

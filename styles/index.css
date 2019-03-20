@@ -129,6 +129,15 @@ body {
 }
 .mapboxgl-popup-content {
     color: black;
+    text-align: center;
+    width: 200px;
+}
+.mapboxgl-popup-content p{
+    padding: 0px;
+    font-size: 15px;
+}
+.mapboxgl-popup-content a{
+    font-size: 10px;
 }
 
 @media screen and (min-width: 360px) {
