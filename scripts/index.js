@@ -56,7 +56,7 @@ function success(pos) {
     // function that takes in page number and then returns url to fetch that pages information from API
     function urlForThePage(pageNumber = 0) {
         // returns the default api needed to fetch data from OpenBrewery, inserts the page number so we can grab all data not just first page
-        return `https://api.openbrewerydb.org/breweries?page=${pageNumber}&per_page=50`
+        return `https://api.openbrewerydb.org/breweries?by_state=georgia&page=${pageNumber}&per_page=50`
     }
     // function userState (actualLocation){
     //     userLocation = [
@@ -236,7 +236,7 @@ function success(pos) {
             // enables user to click button and show a dot of themselves and will track them
             showUserLocation: true
         }));
-        console.log(map1)
+        // console.log(map1)
     }
 
     // main function that will call our other functions and ensure order is correct
@@ -252,7 +252,7 @@ function success(pos) {
             drawListOfBreweries();
         } else {
             // for loop representing the maximum total pages so we can grab all the pages info
-            for (pageNumber= 0; pageNumber <= 161 ; pageNumber++) {
+            for (pageNumber= 0; pageNumber <= 15 ; pageNumber++) {
                 // calls retrievePageOfBreweries which takes pageNumber to actually get the data from BreweriesAPI
                 retrievePageOfBreweries(pageNumber);
             }
@@ -277,4 +277,3 @@ function success(pos) {
 // calls the geolocation API to ask the user for their geolocation data, takes in success, which represents a sucessful retreval of the geolocation data
 // this starts our code and is first thing needed as if we dont have userposition we cannot do what is needed.
 navigator.geolocation.getCurrentPosition(success);
-
