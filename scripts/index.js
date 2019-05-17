@@ -1,8 +1,10 @@
-let allBreweriesList = []
 let userLocation = []
+let allBreweriesList = [];
 
 // function takes in response from calling geolocation API and runs if it is sucessful
 function success(pos) {
+    // let allBreweriesList = [];
+    // let allBreweriesList = [];
     // setting crd(coord) to the coords respose gotten from geolocation API
     let crd = pos.coords;
 
@@ -82,9 +84,6 @@ function success(pos) {
             ...allBreweriesList, 
             ...theActualData
         ];
-        console.log(allBreweriesList);
-        console.log(theActualData);
-        
         // use allBreweriesList which contains Brewery API Data and calls the store function to store data in local storage
         storeBreweries(allBreweriesList);
     
@@ -196,6 +195,19 @@ function success(pos) {
         localStorage.setItem("breweries-data", jsondata)
     }
 
+    // function sortByName(obj1, obj2) {
+    //     const letter1 = obj1.name[0];
+    //     const letter2 = obj2.name[0];
+    
+    //     if (letter1 < letter2) {
+    //         return -1;
+    //     } else if (letter2 < letter1) {
+    //         return 1;
+    //     }
+    
+    //     return 0;
+    // }
+
     
     // function to add a single pin to the map which represents a breweries location, it takes in a single breweryObject   
     function addSinglePinToMap(breweryObject){
@@ -238,7 +250,7 @@ function success(pos) {
             // enables user to click button and show a dot of themselves and will track them
             showUserLocation: true
         }));
-        console.log(map1)
+        // console.log(map1)
     }
 
     // main function that will call our other functions and ensure order is correct
@@ -259,7 +271,10 @@ function success(pos) {
             for (pageNumber= 0; pageNumber <=4 ; pageNumber++) {
                 // calls retrievePageOfBreweries which takes pageNumber to actually get the data from BreweriesAPI
                 retrievePageOfBreweries(pageNumber);
+
+
             }
+            
         }
         // let userLocationInLocalStorage = loadLocation();
         // if (userLocationInLocalStorage) {
@@ -272,11 +287,11 @@ function success(pos) {
         
         
         
-        
         // drawBreweryDataToDetail(allBreweriesList);
         
     }
     main();
+    debugger;
 }
 // calls the geolocation API to ask the user for their geolocation data, takes in success, which represents a sucessful retreval of the geolocation data
 // this starts our code and is first thing needed as if we dont have userposition we cannot do what is needed.
